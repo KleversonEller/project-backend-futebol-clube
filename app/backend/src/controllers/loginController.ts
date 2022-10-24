@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 
 export default class LoginController {
   token: string;
+  //   service
   constructor() {
     this.token = 'sdfsdfsdf';
   }

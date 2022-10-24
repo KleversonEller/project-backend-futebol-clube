@@ -1,11 +1,11 @@
-// import * as sinon from 'sinon';
+import * as sinon from 'sinon';
 import * as chai from 'chai';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 
 import  {app} from '../app';
 // import Example from '../database/models/ExampleModel';
-
+import * as jwt from 'jsonwebtoken';
 import { Response } from 'superagent';
 
 chai.use(chaiHttp);
@@ -15,12 +15,14 @@ const { expect } = chai;
 describe('Fazendo login', () =>{
   it('Se logar com sucesso deve retornar status 200 e o token', async () => {
     const user = {email: 'teste@teste.com', password: '12345678' }
+    sinon.stub(jwt, 'sign').returns('meu-token' as any);
     const response = await chai
     .request(app)
     .post('/login')
     .send(user);
     expect(response.status).to.equal(200);
-    // expect(response.body).to.have.key('token');
+    expect(response.body).to.have.key('token');
+    expect(response.body).to.deep.equal({token: 'meu-token'});
   });
 });
 
