@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
+import LoginService from '../services';
 
 export default class LoginController {
   token: string;
-  //   service
-  constructor() {
+  service;
+  constructor(loginService: LoginService) {
     this.token = 'sdfsdfsdf';
+    this.service = loginService;
   }
 
   login = (_req: Request, res: Response): Response => {
