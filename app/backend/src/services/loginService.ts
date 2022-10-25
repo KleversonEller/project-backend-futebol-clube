@@ -14,12 +14,12 @@ export default class LoginService {
 
   async login(user: ILogin) {
     const findUser: UserModel | null = await this.repository.findUser(user);
-    console.log(findUser);
-    if (!findUser) throw new ErrorGenerate(400, 'Usuário não cadastrado');
+    // console.log('findUser >>>>>>>>', findUser);
+    if (!findUser?.email) throw new ErrorGenerate(401, 'Incorrect email or password');
     const passwordDB = findUser.password;
     const comparaSenha = bcrypt.compareSync(user.password, passwordDB);
-    if (!comparaSenha) throw new ErrorGenerate(400, 'Senha inválida');
     // console.log('comparação senha >>>>>>', comparaSenha);
+    if (!comparaSenha) throw new ErrorGenerate(401, 'Incorrect email or password');
     const token = this.geraToken(user);
     return token;
   }

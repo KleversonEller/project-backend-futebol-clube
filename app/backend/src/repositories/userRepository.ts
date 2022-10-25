@@ -9,9 +9,10 @@ export default class UserRepository {
 
   findUser = async (user: ILogin) => {
     const { email } = user;
-    const result = await UserModel.findOne({
-      attributes: { exclude: ['password'] },
+    const userFound = await UserModel.findOne({
       where: { email } });
-    return result;
+    // console.log('zzzzzzzz', userFound);
+
+    return userFound;
   };
 }
