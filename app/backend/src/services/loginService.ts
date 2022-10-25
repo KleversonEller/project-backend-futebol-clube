@@ -2,9 +2,11 @@ import * as jwt from 'jsonwebtoken';
 import { Secret } from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import UserRepository from '../repositories';
-import { ILogin } from '../interfaces/interfaces';
+import { ILogin, IUser } from '../interfaces/interfaces';
 import ErrorGenerate from '../utils/ErrorGenerate';
 import UserModel from '../database/models/UserModel';
+
+const secret = process.env.JWT_SECRET;
 
 export default class LoginService {
   repository;
@@ -18,16 +20,23 @@ export default class LoginService {
     if (!findUser?.email) throw new ErrorGenerate(401, 'Incorrect email or password');
     const passwordDB = findUser.password;
     const comparaSenha = bcrypt.compareSync(user.password, passwordDB);
-    // console.log('comparação senha >>>>>>', comparaSenha);
     if (!comparaSenha) throw new ErrorGenerate(401, 'Incorrect email or password');
-    const token = this.geraToken(user);
+    const token = this.geraToken(findUser);
     return token;
   }
 
-  private geraToken = (user: ILogin): Secret => {
-    const secret = process.env.JWT_SECRET;
-    const payload = { email: user.email };
+  private geraToken = (user: IUser): Secret => {
+    const payload = { ...user };
     const token = jwt.sign(payload, secret as Secret);
     return token as Secret;
+  };
+
+  validate = async (token: string) => {
+    console.log('token na service >>>>>>', token);
+
+    const user = jwt.verify(token, secret as Secret);
+    console.log('user na service >>>>>>', user);
+
+    return user as IUser;
   };
 }

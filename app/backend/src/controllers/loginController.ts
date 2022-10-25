@@ -12,4 +12,12 @@ export default class LoginController {
     const token = await this.service.login(req.body);
     return res.status(200).json({ token });
   };
+
+  validate = async (req: Request, res: Response):Promise<Response> => {
+    const user = await this.service.validate(req.headers.authorization as string);
+    console.log('user na controller >>>>>>', user);
+    const { role } = user;
+    console.log('role na controller >>>>>>', role);
+    return res.status(200).json({ role });
+  };
 }
