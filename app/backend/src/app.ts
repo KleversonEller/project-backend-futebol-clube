@@ -1,5 +1,6 @@
 import * as express from 'express';
 import LoginRouter from './routes';
+import errorMid from './middlewares/errorMid';
 
 class App {
   public app: express.Express;
@@ -27,6 +28,7 @@ class App {
 
   private routes():void {
     this.app.use('/login', LoginRouter);
+    this.app.use(errorMid);
   }
 
   public start(PORT: string | number):void {

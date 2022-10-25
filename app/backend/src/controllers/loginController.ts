@@ -1,17 +1,15 @@
 import { Request, Response } from 'express';
 import LoginService from '../services';
+import 'express-async-errors';
 
 export default class LoginController {
-  token: string;
   service;
   constructor(loginService: LoginService) {
-    this.token = 'sdfsdfsdf';
     this.service = loginService;
   }
 
-  login = (_req: Request, res: Response): Response => {
-    console.log('kkkkkkkkkkkkkkkk');
-
-    return res.status(200).json({ token: this.token });
+  login = async (req: Request, res: Response):Promise<Response> => {
+    const token = await this.service.login(req.body);
+    return res.status(200).json({ token });
   };
 }
