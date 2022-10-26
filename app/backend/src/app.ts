@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { LoginRouter, TeamRouter } from './routes';
+import { LoginRouter, TeamRouter, MatchRouter } from './routes';
 import errorMid from './middlewares/errorMid';
 
 class App {
@@ -29,6 +29,7 @@ class App {
   private routes():void {
     this.app.use('/login', LoginRouter);
     this.app.use('/teams', TeamRouter);
+    this.app.use('/matches', MatchRouter);
     this.app.use(errorMid);
   }
 
