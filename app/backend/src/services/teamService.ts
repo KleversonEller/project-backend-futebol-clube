@@ -19,9 +19,14 @@ export default class TeamService {
     return todosTimes;
   }
 
+  async getTeamById(id: number) {
+    console.log('id na service >>>>>>>>', id);
+    const time = await this.repository.getTeamById(id);
+    return time;
+  }
+
   // async login(user: ILogin) {
   //   const findUser: UserModel | null = await this.repository.findUser(user);
-  //   // console.log('findUser >>>>>>>>', findUser);
   //   if (!findUser?.email) throw new ErrorGenerate(401, 'Incorrect email or password');
   //   const passwordDB = findUser.password;
   //   const comparaSenha = bcrypt.compareSync(user.password, passwordDB);

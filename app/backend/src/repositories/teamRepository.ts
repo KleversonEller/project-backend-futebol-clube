@@ -10,8 +10,15 @@ export default class TeamRepository {
 
   getAllTeams = async () => {
     const todosTimes = await TeamModel.findAll({ raw: true });
-    // console.log('zzzzzzzz', userFound);
-
     return todosTimes;
+  };
+
+  getTeamById = async (id: number) => {
+    console.log('id na repo >>>>>>>>', id);
+
+    const time = await TeamModel.findByPk(id, { raw: true });
+    console.log('time na repo >>>>>>>>', time);
+
+    return time;
   };
 }

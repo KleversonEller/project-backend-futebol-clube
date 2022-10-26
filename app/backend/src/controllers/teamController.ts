@@ -13,6 +13,11 @@ export default class TeamController {
     return res.status(200).json(todosTimes);
   };
 
+  getTeamById = async (req: Request, res: Response):Promise<Response> => {
+    const time = await this.service.getTeamById(Number(req.params.id));
+    return res.status(200).json(time);
+  };
+
   // validate = async (req: Request, res: Response):Promise<Response> => {
   //   const user = await this.service.validate(req.headers.authorization as string);
   //   console.log('user na controller >>>>>>', user);
