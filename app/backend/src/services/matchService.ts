@@ -2,7 +2,7 @@
 // import { Secret } from 'jsonwebtoken';
 // import * as bcrypt from 'bcryptjs';
 import { IInserePartida, IPartidaInserida } from '../interfaces/interfaces';
-import { MatchRepository } from '../repositories';
+import { MatchRepository, TeamRepository } from '../repositories';
 // import { ILogin, IUser } from '../interfaces/interfaces';
 import ErrorGenerate from '../utils/ErrorGenerate';
 // import UserModel from '../database/models/UserModel';
@@ -11,8 +11,10 @@ import ErrorGenerate from '../utils/ErrorGenerate';
 
 export default class MatchService {
   repository;
+  teamRepository;
   constructor(matchRepository: MatchRepository) {
     this.repository = matchRepository;
+    this.teamRepository = new TeamRepository();
   }
 
   async getAllMatches() {
@@ -29,6 +31,12 @@ export default class MatchService {
     if (partida.awayTeam === partida.homeTeam) {
       throw new ErrorGenerate(422, 'It is not possible to create a match with two equal teams');
     }
+    const homeTeam = await this.teamRepository.getTeamById(partida.homeTeam);
+    const awayTeam = await this.teamRepository.getTeamById(partida.awayTeam);
+    if (!homeTeam || !awayTeam) {
+      throw new ErrorGenerate(404, 'There is no team with such id!');
+    }
+
     const partidaInserida = await this.repository.addMatch(partida);
     return partidaInserida;
   }

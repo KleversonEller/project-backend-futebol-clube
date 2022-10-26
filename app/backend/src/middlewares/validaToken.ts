@@ -16,11 +16,9 @@ const validaToken = async (req: Request, _res:Response, next: NextFunction) => {
   }
   try {
     jwt.verify(token, secret as string) as JwtPayload;
-    console.log('xxxxxxxxxxxxxxxxxxx');
-
     next();
   } catch (err) {
-    throw new ErrorGenerate(401, 'Invalid token');
+    throw new ErrorGenerate(401, 'Token must be a valid token');
   }
 };
 
