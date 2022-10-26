@@ -14,6 +14,17 @@ export default class MatchRepository {
     return todasPartidas;
   };
 
+  getMatchesInProgress = async (andamento: boolean) => {
+    const partidasEmAndamento = await MatchModel.findAll({
+      where: { inProgress: andamento },
+      include: [
+        { model: TeamModel, as: 'teamHome', attributes: ['teamName'] },
+        { model: TeamModel, as: 'teamAway', attributes: ['teamName'] },
+      ],
+    });
+    return partidasEmAndamento;
+  };
+
   // getMatchById = async (id: number) => {
   //   console.log('id na repo >>>>>>>>', id);
 

@@ -19,6 +19,11 @@ export default class MatchService {
     return todasPartidas;
   }
 
+  async getMatchesInProgress(andamento: boolean) {
+    const partidasEmAndamento = await this.repository.getMatchesInProgress(andamento);
+    return partidasEmAndamento;
+  }
+
   // async getMatchById(id: number) {
   //   console.log('id na service >>>>>>>>', id);
   //   const time = await this.repository.getMatchById(id);
