@@ -32,10 +32,10 @@ export default class LoginService {
   };
 
   validate = async (token: string) => {
-    console.log('token na service >>>>>>', token);
+    // console.log('token na service >>>>>>', token);
 
     const user = jwt.verify(token, secret as Secret);
-    console.log('user na service >>>>>>', user);
+    // console.log('user na service >>>>>>', user);
 
     return user as IUser;
   };
