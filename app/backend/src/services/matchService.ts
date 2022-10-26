@@ -1,6 +1,7 @@
 // import * as jwt from 'jsonwebtoken';
 // import { Secret } from 'jsonwebtoken';
 // import * as bcrypt from 'bcryptjs';
+import { IInserePartida, IPartidaInserida } from '../interfaces/interfaces';
 import { MatchRepository } from '../repositories';
 // import { ILogin, IUser } from '../interfaces/interfaces';
 // import ErrorGenerate from '../utils/ErrorGenerate';
@@ -22,6 +23,11 @@ export default class MatchService {
   async getMatchesInProgress(andamento: boolean) {
     const partidasEmAndamento = await this.repository.getMatchesInProgress(andamento);
     return partidasEmAndamento;
+  }
+
+  async addMatch(partida: IInserePartida) : Promise<IPartidaInserida> {
+    const partidaInserida = await this.repository.addMatch(partida);
+    return partidaInserida;
   }
 
   // async getMatchById(id: number) {
