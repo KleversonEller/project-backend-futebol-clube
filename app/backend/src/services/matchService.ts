@@ -4,7 +4,7 @@
 import { IInserePartida, IPartidaInserida } from '../interfaces/interfaces';
 import { MatchRepository } from '../repositories';
 // import { ILogin, IUser } from '../interfaces/interfaces';
-// import ErrorGenerate from '../utils/ErrorGenerate';
+import ErrorGenerate from '../utils/ErrorGenerate';
 // import UserModel from '../database/models/UserModel';
 
 // const secret = process.env.JWT_SECRET;
@@ -26,8 +26,15 @@ export default class MatchService {
   }
 
   async addMatch(partida: IInserePartida) : Promise<IPartidaInserida> {
+    if (partida.awayTeam === partida.homeTeam) {
+      throw new ErrorGenerate(422, 'It is not possible to create a match with two equal teams');
+    }
     const partidaInserida = await this.repository.addMatch(partida);
     return partidaInserida;
+  }
+
+  async updateProgress(id: number) : Promise<void> {
+    await this.repository.updateProgress(id);
   }
 
   // async getMatchById(id: number) {

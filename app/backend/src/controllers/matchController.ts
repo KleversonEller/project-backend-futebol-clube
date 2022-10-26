@@ -30,6 +30,11 @@ export default class MatchController {
     return res.status(201).json(partidaInserida);
   };
 
+  updateProgress = async (req: Request, res: Response) :Promise<Response> => {
+    await this.service.updateProgress(Number(req.params.id));
+    return res.status(200).json({ message: 'Finished' });
+  };
+
   // getMatchById = async (req: Request, res: Response):Promise<Response> => {
   //   const time = await this.service.getMatchById(Number(req.params.id));
   //   return res.status(200).json(time);

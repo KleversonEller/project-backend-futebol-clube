@@ -28,9 +28,13 @@ export default class MatchRepository {
   addMatch = async (partida: IInserePartida): Promise<IPartidaInserida> => {
     const partidaInserida = await MatchModel.create({ ...partida, inProgress: true });
 
-    console.log('partidaInserida na repo >>>>>>>>', partidaInserida);
+    // console.log('partidaInserida na repo >>>>>>>>', partidaInserida);
 
     return partidaInserida as unknown as IPartidaInserida;
+  };
+
+  updateProgress = async (id: number): Promise<void> => {
+    await MatchModel.update({ inProgress: false }, { where: { id } });
   };
 
   // getMatchById = async (id: number) => {
