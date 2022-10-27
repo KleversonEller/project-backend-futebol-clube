@@ -63,6 +63,7 @@ describe('Fazendo login', () =>{
   });
   
   it('Se acessar /login/validate com o token válido, deve retornar status 200', async () => {
+    sinon.stub(jwt, 'verify').returns(userRetornado as any);
     const response = await chai
       .request(app)
       .get('/login/validate')
