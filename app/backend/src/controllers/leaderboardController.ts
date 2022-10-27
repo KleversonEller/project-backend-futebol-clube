@@ -9,7 +9,7 @@ export default class LeaderboardController {
   }
 
   getRanking = async (_req: Request, res: Response):Promise<Response> => {
-    const ranking = await this.service.getRanking();
+    const [ranking] = await this.service.getRanking();
     return res.status(200).json(ranking);
   };
 }
