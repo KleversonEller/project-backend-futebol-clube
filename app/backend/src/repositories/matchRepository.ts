@@ -1,7 +1,7 @@
 // import { JwtPayload } from 'jsonwebtoken';
 import TeamModel from '../database/models/TeamModel';
 import MatchModel from '../database/models/MatchModel';
-import { IInserePartida, IPartidaInserida } from '../interfaces/interfaces';
+import { IInserePartida, IPartidaInserida, IGoalsUpdate } from '../interfaces/interfaces';
 
 export default class MatchRepository {
   getAllMatches = async () => {
@@ -35,6 +35,11 @@ export default class MatchRepository {
 
   updateProgress = async (id: number): Promise<void> => {
     await MatchModel.update({ inProgress: false }, { where: { id } });
+  };
+
+  updateGoals = async (id: number, { homeTeamGoals, awayTeamGoals }
+  : IGoalsUpdate): Promise<void> => {
+    await MatchModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
   };
 
   // getMatchById = async (id: number) => {

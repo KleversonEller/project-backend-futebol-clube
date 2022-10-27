@@ -22,9 +22,15 @@ interface IPartidaInserida extends IInserePartida{
   inProgress: boolean;
 }
 
+interface IGoalsUpdate {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
+}
+
 export {
   ILogin,
   IUser,
   IInserePartida,
   IPartidaInserida,
+  IGoalsUpdate,
 };

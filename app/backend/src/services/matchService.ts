@@ -1,7 +1,7 @@
 // import * as jwt from 'jsonwebtoken';
 // import { Secret } from 'jsonwebtoken';
 // import * as bcrypt from 'bcryptjs';
-import { IInserePartida, IPartidaInserida } from '../interfaces/interfaces';
+import { IGoalsUpdate, IInserePartida, IPartidaInserida } from '../interfaces/interfaces';
 import { MatchRepository, TeamRepository } from '../repositories';
 // import { ILogin, IUser } from '../interfaces/interfaces';
 import ErrorGenerate from '../utils/ErrorGenerate';
@@ -43,6 +43,10 @@ export default class MatchService {
 
   async updateProgress(id: number) : Promise<void> {
     await this.repository.updateProgress(id);
+  }
+
+  async updateGoals(id: number, goals: IGoalsUpdate) : Promise<void> {
+    await this.repository.updateGoals(id, goals);
   }
 
   // async getMatchById(id: number) {

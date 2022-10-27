@@ -35,6 +35,11 @@ export default class MatchController {
     return res.status(200).json({ message: 'Finished' });
   };
 
+  updateGoals = async (req: Request, res: Response) :Promise<Response> => {
+    await this.service.updateGoals(Number(req.params.id), req.body);
+    return res.status(200).json({ message: 'Gols atualizados' });
+  };
+
   // getMatchById = async (req: Request, res: Response):Promise<Response> => {
   //   const time = await this.service.getMatchById(Number(req.params.id));
   //   return res.status(200).json(time);

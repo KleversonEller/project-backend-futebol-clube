@@ -13,5 +13,6 @@ router.get('/', matchController.getMatchesInProgress);
 router.get('/', matchController.getAllMatches);
 router.post('/', validaToken, matchController.addMatch);
 router.patch('/:id/finish', matchController.updateProgress);
+router.patch('/:id', matchController.updateGoals);
 
 export default router;
