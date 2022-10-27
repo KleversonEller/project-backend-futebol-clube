@@ -12,4 +12,9 @@ export default class LeaderboardController {
     const [ranking] = await this.service.getRanking();
     return res.status(200).json(ranking);
   };
+
+  getRankingAway = async (_req: Request, res: Response):Promise<Response> => {
+    const [ranking] = await this.service.getRankingAway();
+    return res.status(200).json(ranking);
+  };
 }

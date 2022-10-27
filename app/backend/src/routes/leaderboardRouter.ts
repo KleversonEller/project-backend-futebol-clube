@@ -9,5 +9,6 @@ const leaderboardService = new LeaderboardService(leaderboardRepository);
 const leaderboardController = new LeaderboardController(leaderboardService);
 
 router.get('/home', leaderboardController.getRanking);
+router.get('/away', leaderboardController.getRankingAway);
 
 export default router;
