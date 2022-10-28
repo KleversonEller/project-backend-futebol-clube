@@ -39,17 +39,4 @@ export default class MatchController {
     await this.service.updateGoals(Number(req.params.id), req.body);
     return res.status(200).json({ message: 'Gols atualizados' });
   };
-
-  // getMatchById = async (req: Request, res: Response):Promise<Response> => {
-  //   const time = await this.service.getMatchById(Number(req.params.id));
-  //   return res.status(200).json(time);
-  // };
-
-  // validate = async (req: Request, res: Response):Promise<Response> => {
-  //   const user = await this.service.validate(req.headers.authorization as string);
-  //   console.log('user na controller >>>>>>', user);
-  //   const { role } = user;
-  //   console.log('role na controller >>>>>>', role);
-  //   return res.status(200).json({ role });
-  // };
 }
