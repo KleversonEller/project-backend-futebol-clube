@@ -1,7 +1,8 @@
+import queryRanking from '../utils/queryRanking';
 import sequelize from '../database/models';
 
 export default class LeaderboardRepository {
-  getRanking = async () => {
+  getRankingHome = async () => {
     const ranking = await sequelize.query(
       `SELECT t.team_name as name,
       SUM(IF(m.home_team_goals>m.away_team_goals,3,IF(m.home_team_goals=m.away_team_goals,1,0)))
@@ -39,6 +40,13 @@ export default class LeaderboardRepository {
       FROM TRYBE_FUTEBOL_CLUBE.matches as m INNER JOIN TRYBE_FUTEBOL_CLUBE.teams as t
       ON m.away_team = t.id WHERE in_progress = false GROUP BY t.team_name
       ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC, goalsOwn`,
+    );
+    return ranking;
+  };
+
+  getRanking = async () => {
+    const ranking = await sequelize.query(
+      queryRanking,
     );
     return ranking;
   };

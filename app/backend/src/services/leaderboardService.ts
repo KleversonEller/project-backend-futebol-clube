@@ -14,13 +14,18 @@ export default class LeaderboardService {
     this.repository = leaderboardRepository;
   }
 
-  async getRanking() {
-    const ranking = await this.repository.getRanking();
+  async getRankingHome() {
+    const ranking = await this.repository.getRankingHome();
     return ranking;
   }
 
   async getRankingAway() {
     const ranking = await this.repository.getRankingAway();
+    return ranking;
+  }
+
+  async getRanking() {
+    const ranking = await this.repository.getRanking();
     return ranking;
   }
 }
