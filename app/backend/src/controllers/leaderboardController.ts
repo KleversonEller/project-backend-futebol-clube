@@ -8,6 +8,8 @@ export default class LeaderboardController {
     this.service = leaderboardService;
   }
 
+  //!  TESTE
+
   getRankingHome = async (_req: Request, res: Response):Promise<Response> => {
     const [ranking] = await this.service.getRankingHome();
     return res.status(200).json(ranking);
